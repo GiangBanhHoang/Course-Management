@@ -1,0 +1,111 @@
+﻿﻿body {
+}
+
+.far, .fab, .fas {
+    margin-right: 20px;
+}
+
+.container-custom {
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    padding: 0 !important;
+}
+
+.lesson-title {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.lesson-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .lesson-info .lesson-info-teacher .fa-chalkboard-teacher {
+        color: green;
+        margin-right: 1px;
+    }
+
+    .lesson-info .lesson-info-teacher b {
+        color: green;
+    }
+
+    .lesson-info .lesson-info-deadline .fa-hourglass-start {
+        color: orangered;
+        margin-right: 1px;
+    }
+
+.lesson-content b {
+    margin-bottom: 10px;
+}
+
+.lesson-exercise .fa-chalkboard {
+    margin-right: 2px;
+}
+
+.lesson-exercise .fa-pencil-alt {
+    margin-right: 5px;
+}
+
+.lesson-exercise b {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.lesson-exercise ol {
+    margin: 0px;
+    border: 1px solid #3da858;
+    background-color: #eef8f0;
+    border-collapse: collapse;
+}
+
+    .lesson-exercise ol a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .lesson-exercise ol:hover a {
+        text-decoration: underline;
+    }
+
+.move-lesson {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .move-lesson a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 500;
+        font-size: 20px;
+    }
+
+    .move-lesson .pre-lesson, .next-lesson {
+        padding: 10px 10px;
+        background-color: #059862;
+        border-radius: 30px;
+    }
+
+
+        .pre-lesson:hover, .next-lesson:hover {
+            cursor: pointer;
+            background-color: orangered;
+        }
+
+            .pre-lesson:hover a, .next-lesson:hover a {
+                color: #fff;
+            }
+
+.one-lesson-exer p {
+    font-weight: 500;
+}
+
+    .one-lesson-exer p i {
+        margin-right: 5px;
+    }
+
+#place-do-exercise {
+    display: block;
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px
+}

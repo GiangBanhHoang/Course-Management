@@ -1,0 +1,89 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Courses_MVC.Models
+@using Microsoft.AspNetCore.Authorization
+@model Exercise
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{
+    var listId = ViewBag.listIdExercise;
+    var idcurrent = Model.exerciseId;
+    var length = listId.Length;
+    var idMin = listId[0].exerciseId;
+    var idMax = listId[length - 1].exerciseId;
+    var idPre = idcurrent - 1;
+    var idNext = idcurrent + 1;
+}
+<link href="~/css/LessonDetail.css" rel="stylesheet" />
+<div class="container col-9 container-custom mb-5">
+    <partial name="_AlertMessage" />
+    <div class="lesson-title mt-4 p-4 pb-2 text-center ">@Model.exerciseName</div>
+    <div class="lesson-info pb-2 pt-3 p-4">
+        <div class="lesson-info-teacher"><i class="fas fa-chalkboard-teacher"></i><b>Tác giả:</b> @Model.AppUser.UserName</div>
+        <div class="lesson-info-deadline"><i class="fas fa-hourglass-start">Deadline:</i> @Model.deadline</div>
+    </div>
+    <div class="lesson-content mb-3 pl-4 pr-4">
+        <b>Nội dung:</b>
+        <p>
+            @Model.content
+        </p>
+    </div>
+    <div class="exercise-input mb-1 pl-4 pr-4">
+        <b>Input:</b>
+        <div>@Model.input</div>
+    </div>
+    <div class="exercise-output mb-1 pl-4 pr-4">
+        <b>Output:</b>
+        @Model.output
+    </div>
+    <div class="do-exercise mb-3 pl-4 pr-4">
+        <form action="/ExerciseInUsers/SubmitExercise" method="post">
+            <input type="hidden" name="exerciseId" value="@Model.exerciseId" />
+            <input type="hidden" name="lessonId" value="@Model.lessonId" />
+
+            <label for="place-do-exercise"><b>Làm bài tập:</b></label>
+            <textarea name="content"
+                      id="place-do-exercise"
+                      cols="30" rows="10" placeholder="Nhập bài làm của bạn"
+                      class="form-control"
+                      required>
+
+            </textarea>
+            <span asp-validation-for="content" class="text-danger"></span>
+            <button class="btn btn-primary" type="submit">Nộp bài</button>
+        </form>
+
+    </div>
+    
+
+    <div class="move-lesson p-4 pt-0">
+
+        @if (idPre == idMin - 1)
+        {
+            <div class="next-lesson">
+                <a href="/lesson/LessonDetail?Id=@Model.lessonId" class="pre-lesson-btn">Quay lại bài học</a>
+            </div>
+            <div class="pre-lesson">
+                <a href="/Exercises/DetailsInUI?Id=@idNext" class="pre-lesson-btn">Kế tiếp</a>
+            </div>
+        }
+        else if (idNext == idMax + 1)
+        {
+            <div class="next-lesson">
+                <a href="/Exercises/DetailsInUI?Id=@idPre" class="pre-lesson-btn">Quay lại</a>
+            </div>
+            <div class="next-lesson">
+                <a href="/lesson/LessonDetail?Id=@Model.lessonId" class="pre-lesson-btn">Quay lại bài học</a>
+            </div>
+        }
+        else
+        {
+            <div class="next-lesson">
+                <a href="/Exercises/DetailsInUI?Id=@idPre" class="pre-lesson-btn">Quay lại</a>
+            </div>
+            <div class="pre-lesson">
+                <a href="/Exercises/DetailsInUI?Id=@idNext" class="pre-lesson-btn">Kế tiếp</a>
+            </div>
+        }
+    </div>
+</div>

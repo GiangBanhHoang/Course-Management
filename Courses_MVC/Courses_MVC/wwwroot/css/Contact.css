@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/*body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    background-color: rgba(0,0,0,0.05);
+}*/
+
+.social-icon {
+    font-size: 35px;
+    text-align: center;
+}
+
+.contact-container {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    margin-bottom: 100px;
+    margin-left: 70px;
+}
+
+.contact-information {
+    border: 1px solid #c4c4c4;
+    border-radius: 15px;
+    width: 350px;
+    margin-top: 50px;
+}
+
+.contact-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 35px;
+    height: 60px;
+    background-color: #9854a0;
+    color: #fff;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px 15px 0 0;
+}
+
+.icon--css {
+    font-size: 20px;
+    margin: 10px 20px 0 10px;
+}
+
+.contact-conn {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.img--css {
+    width: 300px;
+    margin: 10px 0 30px 20px;
+}
+
+.contact-form {
+    width: 650px;
+    margin: 50px 0 0 70px;
+    border: 1px solid #c4c4c4;
+    border-radius: 15px;
+    position: relative;
+    z-index: 1;
+    /* background:url("/img/—Pngtree—online\ education\ training\ course\ design_5331074.png") no-repeat bottom left;
+    background-size: 300px;
+    background-origin: padding-box; */
+}
+
+    .contact-form .btn-primary {
+        background-color: #9854a0 !important;
+        border: 1px solid #9854a0;
+        font-weight: 700;
+    }
+
+.course-img {
+    width: 400px;
+    position: absolute;
+    bottom: -90px;
+    /* left: -100px; */
+    right: -130px;
+    pointer-events: none;
+}
+
+label {
+    font-weight: 600;
+}

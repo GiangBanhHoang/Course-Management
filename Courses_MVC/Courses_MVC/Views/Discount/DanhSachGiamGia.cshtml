@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Courses_MVC.Models.Discount>
+@{
+    ViewData["Title"] = "Danh sách chương trình giảm giá";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+    <partial name="_NavBar" />
+    <section>
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <p class="count--css">Số lượng đăng kí: @ViewBag.count</p>
+        <div class="search-create">
+            <form action="" method="post">
+                <div class="form-inline">
+                    <label class="control-label" style="margin-right: 5px;">Tìm kiếm chương trình</label>
+                    <input type="text" name="search" class="form-control col-md-5" />
+                    <input type="submit" class="btn btn-info" name="submit" value="search" />
+
+                </div>
+            </form>
+            <div>
+                <a asp-controller="Discount" asp-action="ThemGiamGia" class="btn btn-outline-success"><i class="far fa-plus-square"></i> Thêm</a>
+            </div>
+        </div>
+        <div class="table-overflow">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.discription)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.time)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.sale)
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="counterCell">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.discription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.time)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.sale)
+                            </td>
+                            <td>
+                                <a asp-action="ChiTietGiamGia" asp-route-id="@item.discountId"><i class="far fa-edit"></i></a> |
+                                <a asp-action="XoaGiamGia" asp-route-id="@item.discountId" class="text-danger" onclick="return confirm('Bạn chắn chắn xóa chứ?')"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</main>
+<script>
+    const active_lienhe = document.querySelector('#active--giamgia')
+
+    active_lienhe.classList.add('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

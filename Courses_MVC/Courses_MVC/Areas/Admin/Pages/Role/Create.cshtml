@@ -1,0 +1,29 @@
+﻿@page "/admin/add-role/"
+@model Courses_MVC.Areas.Admin.Pages.Role.CreateModel
+@{
+    ViewData["Title"] = "Tạo mới role";
+}
+<h2 class="text-center">@ViewData["Title"]</h2>
+<partial name="_StatusMessage" model="@Model.StatusMassage" />
+
+<hr />
+<div class="row mt-3 mb-lg-5 offset-5">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.name" class="control-label"></label>
+                <input asp-for="Input.name" class="form-control">
+                <span asp-validation-for="Input.name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Tạo mới" class="btn btn-primary"/>
+                <a class="btn btn-primary" asp-page="./Index">Danh sách các role</a>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }

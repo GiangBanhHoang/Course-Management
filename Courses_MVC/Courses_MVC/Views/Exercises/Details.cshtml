@@ -1,0 +1,89 @@
+﻿@model Courses_MVC.Models.Exercise
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-add_course">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">Chi tiết bài luyện tập</h1>
+        <div class="ml-5">
+            <div class="content-option">
+                <h4>Bài luyện tập</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.exerciseId)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.exerciseId)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.exerciseName)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.exerciseName)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.content)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.content)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.input)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.input)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.output)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.output)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.deadline)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.deadline)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Bài học
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Lesson.title)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Tác giả
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.AppUser.UserName)
+                    </dd>
+                </dl>
+            </div>
+            <div class="option-detail">
+                <div class="back-admin">
+                    <a asp-action="ListExerciseAdmin">Trở về</a>
+                </div>
+                <div class="main-option">
+                    <a asp-action="UpdateExercise" asp-route-id="@Model.exerciseId">Chỉnh sửa</a> 
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    const active_lienhe = document.querySelector('#active--baitap')
+    active_lienhe.classList.add('active--css')
+    /*document.querySelector('#active--khoahoc').classList.remove('active--css')*/
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

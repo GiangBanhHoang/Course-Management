@@ -1,0 +1,191 @@
+﻿
+.courses-header {
+    background: url("../img/new-banner-list-courses.png") no-repeat;
+    padding: 40px;
+}
+
+    .courses-header h2 {
+        font-size: 36px;
+        color: #fff;
+        margin: -10px 0 30px 0;
+    }
+
+    .courses-header .input__group input {
+        height: 40px;
+        padding-left: 10px;
+        padding-left: 10px;
+        font-size: 20px;
+        border-radius: 5px;
+        border: none;
+    }
+
+.form-search {
+    position: relative;
+}
+
+.button-search {
+    position: absolute;
+    margin-top: 8px;
+    border: none;
+    opacity: 0.7;
+    padding: 9px;
+    color: #000;
+    margin-left: 210px;
+    background: none;
+    margin-bottom: 6px;
+}
+
+    .button-search :hover {
+        cursor: pointer;
+        color: blue;
+    }
+
+.courses-body .course-topic {
+    padding-left: 50px;
+    font-size: 24px;
+}
+
+.group-topic {
+    margin: 20px 0;
+}
+
+.courses-content {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 40px;
+}
+
+.one-course {
+    position: relative;
+    width: 25%;
+    margin: 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+    .one-course:hover {
+        cursor: pointer;
+        transform: scale(1.08);
+    }
+
+.one-course-content {
+    padding: 0 10px;
+}
+
+.one-course .course-image img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.one-course-content .course-rate {
+    text-align: right;
+    font-weight: 600;
+    color: rgb(40, 107, 207);
+}
+
+.one-course-content .course-title {
+    margin: 10px 0;
+    height: 60px;
+}
+
+    .one-course-content .course-title a {
+        text-decoration: none;
+        color: #000;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .one-course-content .course-title:hover a {
+        text-decoration: underline;
+        color: limegreen;
+        transform: scale(1.08);
+    }
+
+.one-course-content .course-des {
+    text-align: justify;
+    font-size: 16px;
+    text-indent: 10px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.one-course-content .origin-price {
+    color: rgb(153, 152, 152);
+    text-decoration: line-through;
+    text-align: right;
+    margin: 0;
+    font-size: 14px;
+}
+
+.one-course-content .course-price {
+    color: rgb(79, 91, 194);
+    font-weight: 600;
+    text-align: right;
+    margin-top: -10px;
+}
+
+#read-mode-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: blue;
+}
+
+#read-mode-btn {
+    cursor: pointer;
+    color: green;
+}
+
+.discount {
+    padding: 5px;
+    background-color: orangered;
+    color: #fff;
+    text-align: center;
+    line-height: 1.5;
+    position: absolute;
+    top: 0px;
+    left: -1px;
+    border-radius: 10px 0 10px 0;
+}
+.cart-icon-number {
+    /* background-color: orangered; */
+    /* padding: 0 2px; */
+    /* border-radius: 48%; */
+    /* border: orangered; */
+    /* border-color: orange; */
+    font-size: 14px;
+    /* display: block; */
+    color: orangered;
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    font-weight: 500;
+}
+
+.cart-icon {
+    position: relative;
+}
+
+    .cart-icon i {
+        color: orangered;
+        font-size: 20px;
+    }
+.add-car-custom:hover button {
+    transform: scale(1.08);
+}
+
+.course-had-registered {
+    text-align: right
+}
+
+    .course-had-registered .button-had-registered {
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-weight: 500;
+        color: #fff;
+        background-color: cornflowerblue;
+    } 

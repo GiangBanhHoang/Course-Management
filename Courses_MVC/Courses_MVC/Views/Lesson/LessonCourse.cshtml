@@ -1,0 +1,232 @@
+﻿@using Courses_MVC.Models;
+@using Microsoft.AspNetCore.Identity;
+@{
+    ViewData["Title"] = "Khóa học";
+}
+@model IEnumerable<Courses_MVC.Models.Lesson>
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@{
+
+
+    var listLesson = Model.ToArray();
+    <partial name="_AlertMessage" />
+
+    var courseNama = listLesson[0].Course.courseName;
+    var courseDes = listLesson[0].Course.discription;
+    var coursePrice = listLesson[0].Course.price;
+    var courseTime = listLesson[0].Course.totalTime;
+    var courseCount = listLesson.Length;
+    var courseId = listLesson[0].courseId;
+    var coureValue = listLesson[0].Course.rating;
+    var totalStuden = 20;
+    //Hải Đăng
+
+
+    <link href="~/css/CourseDetail.css" rel="stylesheet" />
+    <body>
+        <div class="container col-9 container-custom">
+            <div class="course-header mt-5 ">
+                <div class="course-header-left col-7">
+                    <h2>@courseNama</h2>
+                    <div class="course-student-values">
+                        <p>@totalStuden</p>
+                        <p class="value">@coureValue/10</p>
+                    </div>
+                    <div class="course-des">
+                        <p>
+                            @courseDes
+                        </p>
+                    </div>
+                </div>
+                <div class="course-header-right col-3">
+                    <div class="course-time">
+                        <p class="course-time-title">
+                            <i class="far fa-clock"></i>Thời gian:
+                        </p>
+                        <p>@courseTime</p>
+                    </div>
+                    <div class="count-lesson">
+                        <p class="count-lesson-title">
+                            <i class="fab fa-leanpub"></i>Số bài học
+                        </p>
+                        <p>@courseCount</p>
+                    </div>
+                    <div class="course-price">
+                        <p><i class="fas fa-donate"></i>@coursePrice VNĐ</p>
+                    </div>
+                </div>
+                <div class="course-header-right-add-button col-2">
+                    <div class="add-car-btn btn-success">
+                        <a href="/Courses/AddtoCartInLesson?courseId=@courseId">Đăng kí ngay</a>
+                    </div>
+                </div>
+            </div>
+            <div class="course-lesson mt-5 mb-5 pb-5">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @foreach (var item in Model)
+                    {
+                        <div class="one-lesson">
+                            <div class="one-lesson-name">
+                                <a href="/lesson/LessonDetail?Id=@item.lessonId">@item.title</a>
+                            </div>
+                            <div class="one-lesson-des">
+                                <p><b>Mô tả:</b> @item.description</p>
+                            </div>
+
+                        </div>
+                    }
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <div class="one-lesson">
+                            <div class="one-lesson-name">
+                                <a class="text-dark" id="login" asp-area="Identity" asp-page="/Account/Login" onclick="return confirm('Bạn cần phải đăng nhập mới xem được nội dung bài học')">@item.title</a>
+                            </div>
+                            <div class="one-lesson-des">
+                                <p><b>Mô tả:</b> @item.description</p>
+                            </div>
+
+                        </div>
+                    }
+                    
+                }
+
+
+
+            </div>
+        </div>
+
+        <div class="container col-9 container-custom">
+            <div class="danhgiachung">
+                <div class="danhgia__title">
+                    <p>Đánh giá của khách hàng về khóa học</p>
+                </div>
+                <div class="row padding--css">
+                    <div class="mumber-evaluate col-md-4">
+                        <h2 class="number-block">4.5</h2>
+                        <div class="star-evaluate">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        </div>
+                        <p>@ViewBag.countCmt đánh giá</p>
+                    </div>
+                    <!-- <img id="dalat_danhgia" src="DuLichTrongNuoc__ChiTiet/dalat_danhgia.jpg" alt="Hình ảnh Đà Lạt"> -->
+                    <div class="col-md-8">
+                        <div class="">
+                            <div class="voting-block">
+                                <div class="voting-element ">
+                                    <div class="five-star"></div>
+                                </div>
+                                <div class="voting-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="voting-number">80%</p>
+                            </div>
+                            <div class="voting-block">
+                                <div class="voting-element ">
+                                    <div class="four-star"></div>
+                                </div>
+                                <div class="voting-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <p class="voting-number">20%</p>
+                            </div>
+                            <div class="voting-block">
+                                <div class="voting-element ">
+                                    <div class="three-star"></div>
+                                </div>
+                                <div class="voting-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <p class="voting-number">0%</p>
+                            </div>
+                            <div class="voting-block">
+                                <div class="voting-element ">
+                                    <div class="tow-star"></div>
+                                </div>
+                                <div class="voting-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <p class="voting-number">0%</p>
+                            </div>
+                            <div class="voting-block">
+                                <div class="voting-element ">
+                                    <div class="one-star"></div>
+                                </div>
+                                <div class="voting-star">
+                                    <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <p class="voting-number">0%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container col-9 container-custom mt-3">
+            <h3 class="title-h3">Nhận xét của học viên</h3>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <form asp-action="ThemBinhLuanUI" asp-controller="Comments" method="post" class="col-10 mt-4 offset-1 ">
+                    <input type="hidden" name="courseId" value="@courseId" class="form-control mb-2 " />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group ">
+                        <input name="content" class="form-control mb-2" required placeholder="Bạn có thắc mắc về điều gì?" />
+                    </div>
+                    <div class="form-group mt-4">
+                        <label class="control-label">Điểm đánh giá</label>
+                        <input type="number" min="0" max="10" step="0.01" name="evaluate" class="form-control mb-2 " required />
+                    </div>
+                    <div class="form-group submit-form-css">
+                        <input type="submit" name="submit" value="Viết đánh giá" class="button--design " />
+                        <input type="button" name="more" value="Xem thêm đánh giá" class="button--design " />
+                    </div>
+
+                </form>
+            }
+            else
+            {
+                <div class="form-group submit-form-css">
+                    <a class="button--design " id="login" asp-area="Identity" asp-page="/Account/Login" style="color:#000;" onclick="return confirm('Bạn phải đăng nhập mới được viết bình luận')">
+                    Viết đánh giá
+                    </a>
+                    <a class="button--design " href="#" style="color:#000;">Xem thêm đánh giá</a>
+                </div>
+                
+                
+            }
+
+
+            <hr>
+            @foreach (var item in ViewBag.listCmt)
+            {
+                <div class="content-comment col-11 mb-5">
+                    <div class="content-comment__icon">
+                        <img src="/img/icons/@item.AppUser.avatar" title="avatar"/>
+                    </div>
+                    <div class="content-comment-block">
+                        <p class="content-comment__Title">@item.AppUser.UserName</p>
+                        <div class="content-comment__star">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> ( @item.evaluate/10 )
+                        </div>
+                        <p class="content-comment__content">@item.content</p>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </body>
+
+}
+@{ 
+    <script>
+        const active_lienhe = document.querySelector('#navbar-khoahoc')
+
+        active_lienhe.classList.add('nav--active')
+    </script>
+}
+

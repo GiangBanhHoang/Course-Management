@@ -1,0 +1,54 @@
+﻿@model Courses_MVC.Models.Topic
+@{
+    ViewData["Title"] = "Chi tiết chủ đề";
+}
+
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-add_course">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <div class="ml-5">
+            <div class="">
+                <hr />
+
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.topicId)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.topicId)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.topicName)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.topicName)
+                    </dd>
+                </dl>
+            </div>
+            <div class="option-detail">
+
+                <div class="back-admin">
+                    <a asp-action="DanhSachTopic">Danh sách chủ đề</a>
+                </div>
+                <div class="main-option">
+                    <a asp-action="CapNhatTopic" asp-route-id="@Model.topicId">Chỉnh sửa</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    const active_lienhe = document.querySelector('#active--chude')
+
+    active_lienhe.classList.add('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

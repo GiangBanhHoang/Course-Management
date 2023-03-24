@@ -1,0 +1,68 @@
+﻿@model Courses_MVC.Models.Contact
+@{
+    ViewData["Title"] = "Thêm liên hệ";
+}
+
+<div class="main">
+    <partial name="_NavBar" />
+    <div class="col-md-8">
+        <partial name="_AlertMessage" />
+        <h2 class="contact-title text-center">Thêm liên hệ</h2>
+        <form asp-action="ThemContact" class="col-md-10 offset-md-2 mt-5">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mt-3">
+                <label asp-for="AppUserId" class="control-label"></label>
+                <select asp-for="AppUserId" class="form-control" asp-items="ViewBag.user"></select>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="HoTen" class="control-label">Họ tên <span class="text-danger">*</span></label>
+                <input asp-for="HoTen" class="form-control" />
+                <span asp-validation-for="HoTen" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="email" class="control-label">Email <span class="text-danger">*</span></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="SDT" class="control-label">Số điện thoại <span class="text-danger">*</span></label>
+                <input asp-for="SDT" class="form-control" />
+                <span asp-validation-for="SDT" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="title" class="control-label">Tiêu đề </label>
+                <input asp-for="title" class="form-control" />
+                <span asp-validation-for="title" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="content" class="control-label">Nội dung</label>
+                <textarea asp-for="content" class="form-control" required rows="4" id="content"></textarea>
+                <span asp-validation-for="content" class="text-danger"></span>
+            </div>
+            <div class="form-row mb-4">
+                <div class="form-group col-md-6">
+                    <input type="submit" name="submit" value="Creat" class="btn btn-primary btn-block" />
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Trở về</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+@{ 
+    var summernote = new Courses_MVC.Models.Summernote("#content");
+
+}
+<partial name="_Summernote" model="summernote"/>
+
+<script>
+    const active_lienhe = document.querySelector('#active--lienhe')
+
+    active_lienhe.classList.add('active--css')
+    document.querySelector('#active--khoahoc').classList.remove('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

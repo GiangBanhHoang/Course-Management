@@ -1,0 +1,29 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<h2 class="text-center mt-4">Quản lý tài khoản</h2>
+
+<div class="">
+    <h4 class="mb-2 text-center">Thay đổi các thiết lập của tài khoản</h4>
+    <hr />
+    <div class="row offset-3 mb-5 mt-3">
+        <div class="col-md-3">
+            <partial name="_ManageNav" />
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</divclass="offset-4">
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

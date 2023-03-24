@@ -1,0 +1,102 @@
+﻿@model Courses_MVC.Models.Contact
+@using Courses_MVC.Models;
+@using Microsoft.AspNetCore.Identity;
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+<link rel="stylesheet" href="~/css/Contact.css">
+<link rel="stylesheet" href="~/css/site.css">
+<div class=" contact-container">
+    <partial name="_AlertMessage" />
+    <div class="contact-information">
+        <h2 class="contact-title">Thông tin liên hệ</h2>
+        <div class="information">
+            <!-- <p>Công ty cổ phần du lịch Việt Nam UITour</p> -->
+            <div>
+                <p class="contact-p"><i class="fas fa-map-marker-alt icon--css"></i>  Trường Đại học UIT - ĐHQG TPHCM</p>
+            </div>
+            <div>
+                <p class="contact-p"><i class="fas fa-history icon--css"></i>  Từ 8h30 - 18h00 hằng ngày</p>
+            </div>
+            <div>
+                <p class="contact-p"><i class="fas fa-phone-volume icon--css"></i>  0123456789</p>
+            </div>
+            <div>
+                <p class="contact-p"><i class="fas fa-envelope icon--css"></i>  haidangtr1501@gmail.com</p>
+            </div>
+            <p class="contact-conn">Kết nối với chúng tôi</p>
+            <div class="social-icon">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-google-plus"></i>
+            </div>
+            <img src="~/img/map.png" alt="Địa chỉ trên Google map" class="img--css">
+        </div>
+    </div>
+    <div class="contact-form ">
+        <h2 class="contact-title">Ý kiến đóng góp của khách hàng</h2>
+        <form asp-action="Create" class="col-md-8 offset-md-2 mt-5">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="form-group mt-3">
+                    <label asp-for="HoTen" class="control-label">Họ tên <span class="text-danger">*</span></label>
+                    <input asp-for="HoTen" value="@UserManager.GetUserName(User)" class="form-control" disabled />
+                </div>
+                <div class="form-group mt-3">
+                    <input asp-for="email" class="form-control" hidden />
+                </div>
+            }
+            else
+            {
+                <div class="form-group mt-3">
+                    <label asp-for="HoTen" class="control-label">Họ tên <span class="text-danger">*</span></label>
+                    <input asp-for="HoTen" class="form-control" />
+                    <span asp-validation-for="HoTen" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="email" class="control-label">Email <span class="text-danger">*</span></label>
+                    <input asp-for="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+
+            }
+            <div class="form-group mt-3">
+                <label asp-for="SDT" class="control-label">Số điện thoại <span class="text-danger">*</span></label>
+                <input asp-for="SDT" class="form-control" />
+                <span asp-validation-for="SDT" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="title" class="control-label">Tiêu đề </label>
+                <input asp-for="title" class="form-control" />
+                <span asp-validation-for="title" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="content" class="control-label">Nội dung</label>
+                <textarea asp-for="content" class="form-control" required rows="4" id="content"></textarea>
+                <span asp-validation-for="content" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-4">
+                <input type="submit" name="submit" value="Gửi" onclick="submit()" class="btn btn-primary btn-block col-md-4 mt-4 offset-md-4" />
+            </div>
+        </form>
+        <img src="~/img/—Pngtree—online education training course design_5331074.png" alt="" class="course-img">
+    </div>
+    <img src="https://drive.google.com/file/d/1tg8t9mU6fK2NiIaoOpZGDBqKyDHl3GWK/view?usp=sharing" alt="" class="course-img">
+</div>
+
+<script>
+    const active_lienhe = document.querySelector('#navbar-lienhe')
+
+    active_lienhe.classList.add('nav--active')
+    /*document.querySelector('#active--khoahoc').classList.remove('active--css')*/
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

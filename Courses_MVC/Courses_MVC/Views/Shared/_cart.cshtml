@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    string jsoncart = session.GetString(Courses_MVC.Controllers.CoursesController.CARTKEY);
+    if (jsoncart != null)
+    {
+        var cart = JsonConvert.DeserializeObject<List<CarItem>>(jsoncart);
+        <a href="/Courses/CartDisplay"
+           class="cart-icon nav-item">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-icon-number">(@cart.Count)</span>
+        </a>
+    }
+    else
+    {
+        <a href="/Courses/CartDisplay"
+           class="cart-icon nav-item">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-icon-number">(0)</span>
+        </a>
+    }
+}

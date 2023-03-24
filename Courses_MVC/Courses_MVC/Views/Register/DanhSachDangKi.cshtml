@@ -1,0 +1,143 @@
+﻿@model IEnumerable<Courses_MVC.Models.Register>
+@{
+    ViewData["Title"] = "Danh sách đăng kí khóa học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/StyleSheet.css" rel="stylesheet" />
+<main class="main">
+    <partial name="_NavBar" />
+    <section>
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <p class="count--css">Số lượng đăng kí: @ViewBag.count</p>
+        <div class="search-create">
+            <form action="" method="post">
+                <div class="form-inline">
+                    <label class="control-label" style="margin-right: 5px;">Tìm kiếm khóa học</label>
+                    <input type="text" name="search" class="form-control col-md-5" />
+                    <input type="submit" class="btn btn-info" name="submit" value="search" />
+
+                </div>
+            </form>
+            <div>
+                <a asp-controller="Register" asp-action="ThemDangKi" class="btn btn-outline-success"><i class="far fa-plus-square"></i> Thêm</a>
+                @*<a asp-controller="Register" asp-action="ExportExcel" class="btn btn-outline-success"> Xuất file Excel</a>*@
+                <a class="btn btn-outline-success custom-excel" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fas fa-file-export"></i> Xuất file Excel
+                </a>
+                <!-- Button trigger modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center text-capitalize modal-title-custom" id="exampleModalLongTitle">Báo cáo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/Register/ExportExcel" method="post">
+                                    <label for="name">Tên học viên</label>
+                                    <select id="name" name="userId">
+                                        <option value="" selected disabled hidden>Choose here</option>
+                                        @foreach (var item in ViewBag.listUser)
+                                        {
+                                            foreach (var item2 in Model)
+                                            {
+                                                if (item.Id == item2.userId)
+                                                {
+                                                    <option value="@item.Id">@item.UserName</option>
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                    <br />
+                                    <label for="course">Tên khóa học</label>
+                                    <select id="course" name="courseId">
+                                        <option value="" selected disabled hidden>Choose here</option>
+                                        @foreach (var item in ViewBag.listCourse)
+                                        {
+                                            foreach (var item2 in Model)
+                                            {
+                                                if (item.courseId == item2.courseId)
+                                                {
+                                                    <option value="@item.courseId">@item.courseName</option>
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                    </select>
+                                    <label for="filename">Tên file excel</label>
+                                    <input name="filename" id="filename" required/>
+                                    <br />
+                                    <div class="modal-footer">
+                                        @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>*@
+                                        <button type="submit" class="btn btn-outline-success">Xuất file</button>
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-overflow">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AppUser.UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Course.courseName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.timeReg)
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="counterCell">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AppUser.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Course.courseName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.timeReg)
+                            </td>
+                            <td>
+                                <a asp-action="ChiTietDangKi" asp-route-id="@item.registerId"><i class="far fa-edit"></i></a> |
+                                <a asp-action="XoaDangKi" asp-route-id="@item.registerId" class="text-danger" onclick="return confirm('Bạn chắn chắn xóa chứ?')"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</main>
+<script>
+    const active_lienhe = document.querySelector('#active--dangki')
+
+    active_lienhe.classList.add('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

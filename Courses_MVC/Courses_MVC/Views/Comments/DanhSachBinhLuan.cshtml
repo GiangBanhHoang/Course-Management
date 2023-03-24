@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Courses_MVC.Models.Comment>
+@{
+    ViewData["Title"] = "Danh sách bình luận của học viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+    <partial name="_NavBar" />
+    <section>
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <p class="count--css">Số lượng bình luận: @ViewBag.count</p>
+        <div class="search-create">
+            <form action="" method="post">
+                <div class="form-inline">
+                    <label class="control-label" style="margin-right: 5px;">Tìm kiếm học viên</label>
+                    <input type="text" name="search" class="form-control col-md-5" />
+                    <input type="submit" class="btn btn-info" name="submit" value="search" />
+
+                </div>
+            </form>
+            <div>
+                <a asp-controller="Comments" asp-action="ThemBinhLuan" class="btn btn-outline-success"><i class="far fa-plus-square"></i> Thêm</a>
+            </div>
+        </div>
+        <div class="table-overflow">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            Tên học viên
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Course.courseName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.evaluate)
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="counterCell">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AppUser.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Course.courseName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.evaluate)
+                            </td>
+                            <td>
+                                <a asp-action="ChiTietBinhLuan" asp-route-id="@item.cmtId" ><i class="far fa-edit"></i></a> |
+                                <a asp-action="XoaBinhLuan" asp-route-id="@item.cmtId" class="text-danger" onclick="return confirm('Bạn chắn chắn xóa chứ?')"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</main>
+<script>
+    const active_lienhe = document.querySelector('#active--binhluan')
+
+    active_lienhe.classList.add('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

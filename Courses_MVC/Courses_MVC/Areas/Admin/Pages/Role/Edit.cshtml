@@ -1,0 +1,49 @@
+﻿@page "/admin/edit-role/{roleid}"
+
+@model Courses_MVC.Areas.Admin.Pages.Role.EditModel
+@{
+    ViewData["Title"] = "Cập nhật role";
+}
+<h2 class="text-center">@ViewData["Title"]</h2>
+<partial name="_StatusMessage" model="@Model.StatusMassage" />
+
+<hr />
+<div class="row mt-3 mb-lg-5 offset-4">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.name" class="control-label"></label>
+                <input asp-for="Input.name" class="form-control">
+                <span asp-validation-for="Input.name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                <a class="btn btn-primary" asp-page="./Index">Danh sách các role</a>
+            </div>
+
+        </form>
+        <hr />
+        <p>Các đặt tính của role:
+            <a asp-page="./AddRoleClaim" asp-route-roleid="@Model.role.Id">+ Thêm claim</a>
+        </p>
+        @if(Model.Claims.Count > 0)
+         {
+            <ul>
+               @foreach(var claim in Model.Claims)
+                {
+                   
+                   <li> 
+                       <a asp-page="./EditRoleClaim" asp-route-claimid="@claim.Id">
+                        @claim.ClaimType : @claim.ClaimValue
+                        </a>
+                   </li>
+                }
+            </ul>
+         }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

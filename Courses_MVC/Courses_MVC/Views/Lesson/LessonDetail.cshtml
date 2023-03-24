@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model Lesson
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@{
+
+    var id = Model.lessonId;
+    var idCourse = Model.courseId;
+    var idNext = id + 1;
+    var idPre = id - 1;
+    var listLesson = ViewBag.listLesson;
+    var length = listLesson.Length;
+    var idMin = listLesson[0].lessonId;
+    var idMax = listLesson[length - 1].lessonId;
+}
+<link href="~/css/LessonDetail.css" rel="stylesheet" />
+<body>
+    <div class="container col-9 container-custom mb-5">
+        <div class="lesson-title mt-4 p-4 pb-2 text-center">@Model.title</div>
+        <div class="text-center">
+            <iframe width="727" height="409" src="https://www.youtube.com/embed/ILr_rU-lISk?list=PL33lvabfss1xagFyyQPRcppjFKMQ7lvJM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="lesson-des pb-0 pt-3 p-4">
+            <b>Mô tả:</b>
+            <p>@Model.description</p>
+        </div>
+        <div class="one-lesson-exer pb-0  p-4"><p><i class="fab fa-leanpub"></i> Sô lượng bài tập: @ViewBag.numberOfExercise</p></div>
+        <div class="lesson-content mb-3 p-4 pb-2">
+            <b>Nội dung:</b>
+            <p>
+                @Model.content
+            </p>
+        </div>
+        <div class="lesson-exercise p-4 pt-0 pb-3">
+            <b> <i class="fas fa-chalkboard"></i> Bài tập</b>
+            @foreach (var item in ViewBag.listExercise)
+            {
+                <ol>
+                    <i class="fas fa-pencil-alt"></i>
+                    <a href="/Exercises/DetailsInUI?Id=@item.exerciseId">@item.exerciseName</a>
+                </ol>
+
+            }
+            
+
+        </div>
+        <div class="move-lesson p-4 pt-0">
+            @{
+                if (idPre == idMin - 1)
+                {
+                    <div class="next-lesson">
+                        <a href="/Lesson/LessonCourse?Id=@Model.courseId" class="pre-lesson-btn">Quay lại khóa học</a>
+                    </div>
+                    <div class="pre-lesson">
+                        <a href="/lesson/LessonDetail?Id=@idNext" class="pre-lesson-btn">Tiếp theo</a>
+                    </div>
+                }
+                else if (idNext == idMax + 1)
+                {
+                    <div class="next-lesson">
+                        <a href="/lesson/LessonDetail?Id=@idPre" class="pre-lesson-btn">Quay lại</a>
+                    </div>
+                    <div class="next-lesson">
+                        <a href="/Lesson/LessonCourse?Id=@Model.courseId" class="pre-lesson-btn">Quay lại khóa học</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="next-lesson">
+                        <a href="/lesson/LessonDetail?Id=@idPre" class="pre-lesson-btn">Quay lại</a>
+                    </div>
+                    <div class="pre-lesson">
+                        <a href="/lesson/LessonDetail?Id=@idNext" class="pre-lesson-btn">Tiếp theo</a>
+                    </div>
+                }
+            }
+
+
+        </div>
+    </div>
+
+
+</body>
+@{ 
+    <script>
+        const active_lienhe = document.querySelector('#navbar-khoahoc')
+
+        active_lienhe.classList.add('nav--active')
+    </script>
+}
+
+
+
+

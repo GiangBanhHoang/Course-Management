@@ -1,0 +1,147 @@
+﻿body {
+}
+.far, .fab, .fas {
+    margin-right: 20px;
+}
+
+.container-custom {
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    padding: 0 !important;
+}
+
+.course-header {
+    display: flex;
+    background-color: #1e2a55;
+    color: #fff;
+    padding: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.course-header-left {
+    width: 50%;
+    padding-right: 20px;
+    margin-right: 20px;
+    border-right: #a5adba 1px solid;
+}
+
+    .course-header-left h2 {
+        font-size: 36px;
+    }
+
+    .course-header-left .course-des {
+        font-weight: normal;
+    }
+
+.course-student-values p {
+    display: inline-block;
+    margin-right: 20px;
+    color: #a5adba;
+    font-weight: normal;
+}
+
+.course-student-values .value {
+    color: rgb(221, 247, 75);
+}
+
+.course-header-right {
+    width: 35%;
+    padding-top: 43px;
+    padding-right: 20px;
+    border-right: #a5adba 1px solid;
+}
+
+.course-time, .count-lesson, .course-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .course-time .course-time-title {
+        color: #a5adba;
+        font-weight: normal;
+    }
+
+    .count-lesson .count-lesson-title {
+        color: #a5adba;
+        font-weight: normal;
+    }
+
+.course-price {
+    color: #a5adba;
+    font-weight: normal;
+}
+
+.course-header-right-add-button {
+    font-size: 14px;
+    align-content: center;
+    padding: 10px;
+}
+
+.add-car-btn {
+        text-align: center;
+        align-content: center;
+        justify-content: center;
+        padding: 10px;
+        background-color: orangered;
+        border-radius: 10px;
+        margin-top: 75px;
+    }
+
+        .add-car-btn:hover {
+            transform: scale(1.08);
+            cursor: pointer;
+        }
+
+    .course-header-right-add-button a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+        .course-header-right-add-button a:hover {
+            color: #fff;
+        }
+
+        .course-header-right-add-button a i {
+            margin: 5px;
+        }
+
+.course-lesson {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.one-lesson {
+    width: 45%;
+    margin: 15px;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgb(234, 250, 253);
+}
+
+    .one-lesson:hover {
+        transform: scale(1.08);
+        cursor: pointer;
+    }
+
+.one-lesson-name {
+    text-align: center;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+    .one-lesson-name a {
+        text-decoration: none;
+        color: #000;
+    }
+
+.one-lesson-exer p {
+    font-weight: 500;
+}
+
+    .one-lesson-exer p i {
+        margin-right: 5px;
+    }

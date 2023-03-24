@@ -1,0 +1,53 @@
+﻿@model Courses_MVC.Models.Topic
+@{
+    ViewData["Title"] = "Xóa chủ đề";
+}
+
+@{
+ViewData["Title"] = "Xóa khóa học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-add_course">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <div class="ml-5">
+            <div>
+                <h4>Course</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.topicId)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.topicId)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.topicName)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.topicName)
+                    </dd>
+
+                </dl>
+
+                <form asp-action="XoaTopic">
+                    <input type="hidden" asp-for="topicId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    <a asp-action="Index">Trở về</a>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    const active_lienhe = document.querySelector('#active--chude')
+    active_lienhe.classList.add('active--css')
+    /*document.querySelector('#active--khoahoc').classList.remove('active--css')*/
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

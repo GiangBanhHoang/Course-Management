@@ -1,0 +1,69 @@
+﻿@model Courses_MVC.Models.ExerciseInUser
+@{
+    ViewData["Title"] = "Thêm sinh viên làm bài tập";
+}
+
+<div class="main">
+    <partial name="_NavBar" />
+    <div class="col-md-8">
+        <partial name="_AlertMessage" />
+        <h2 class="contact-title text-center">@ViewData["Title"]</h2>
+        <form asp-action="ThemSVBT" class="col-md-10 offset-md-2 mt-5">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mt-3">
+                <label asp-for="userId" class="control-label"></label>
+                <select asp-for="userId" class="form-control" asp-items="ViewBag.userId"></select>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="exerciseId" class="control-label"></label>
+                <select asp-for="exerciseId" class="form-control" asp-items="ViewBag.exerciseId"></select>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="submit" class="control-label"></label>
+                <input asp-for="submit" class="form-control" />
+                <span asp-validation-for="submit" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="scores" class="control-label"></label>
+                <input asp-for="scores" class="form-control" />
+                <span asp-validation-for="scores" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="content" class="control-label"></label>
+                <textarea asp-for="content" class="form-control" id="content"></textarea>
+                <span asp-validation-for="content" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="status" class="control-label"></label>
+                <select asp-for="status" class="form-control">
+                    <option value="Chưa chấm điểm">Chưa chấm điểm</option>
+                    <option value="Đã chấm điểm">Đã chấm điểm</option>
+                </select>
+            </div>
+            <div class="form-row mb-4">
+                <div class="form-group col-md-6">
+                    <input type="submit" name="submit" value="Thêm" class="btn btn-primary btn-block" />
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="DanhSachBTUser" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Trở về</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+@{
+    var summernote = new Courses_MVC.Models.Summernote("#content");
+
+}
+<partial name="_Summernote" model="summernote" />
+
+<script>
+    const active_lienhe = document.querySelector('#active--SV_BT')
+
+    active_lienhe.classList.add('active--css')
+    document.querySelector('#active--khoahoc').classList.remove('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

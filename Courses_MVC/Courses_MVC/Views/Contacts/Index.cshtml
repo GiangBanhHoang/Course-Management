@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Courses_MVC.Models.Contact>
+
+@{
+    ViewData["Title"] = "Danh sách liên hệ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+    <partial name="_NavBar" />
+    <section>
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <p class="count--css">Số lượng khóa học: @ViewBag.count</p>
+        <div class="search-create">
+            <form action="" method="post">
+                <div class="form-inline">
+                    <label class="control-label" style="margin-right: 5px;">Tìm kiếm user</label>
+                    <input type="text" name="search" class="form-control col-md-6">
+                    <input type="submit" class="btn btn-info" name="submit" value="search">
+
+                </div>
+            </form>
+            <div>
+                <a asp-controller="Contacts" asp-action="ThemContact" class="btn btn-outline-success"><i class="far fa-plus-square"></i> Thêm</a>
+            </div>
+        </div>
+        <div class="table-overflow">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HoTen)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SDT)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.time)
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="counterCell">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HoTen)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SDT)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.title)
+                            </td>
+                            <th>
+                                @Html.DisplayFor(model => item.time)
+                            </th>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.contactId"><i class="far fa-edit"></i></a> |
+                                <a asp-action="Delete" asp-route-id="@item.contactId" class="text-danger" onclick="return confirm('Bạn chắn chắn xóa chứ?')"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</main>
+<script>
+    const active_lienhe = document.querySelector('#active--lienhe')
+
+    active_lienhe.classList.add('active--css')
+    document.querySelector('#active--khoahoc').classList.remove('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

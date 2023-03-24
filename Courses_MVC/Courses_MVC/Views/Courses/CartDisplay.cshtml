@@ -1,0 +1,151 @@
+﻿@model List<Courses_MVC.Models.CarItem>
+@using System.Collections;
+@{
+    ViewData["Title"] = "Giỏ hàng";
+
+}
+<link href="~/css/CartDisplay.css" rel="stylesheet" />
+
+<h2 class="cart-header">GIỎ HÀNG</h2>
+
+@if (Model.Count > 0)
+{
+    decimal total = 0;
+    int stt = 1;
+    int sttmodel = 1;
+    List<int> list = new List<int>();
+    foreach (var i in Model)
+    {
+        list.Add(i.Course.courseId);
+    }
+
+    <div class="cart-container container-fluid ">
+
+        <div class="table-course p-4 m-2">
+            <div class="clear mb-2 ">
+                <a href="/Courses/ClearCartAll"
+                   class="btn btn-danger ">Xóa tất cả </a>
+            </div>
+            <table class="table table-main">
+                <tr>
+                    <th>STT</th>
+                    <th>Sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th></th>
+                </tr>
+                @foreach (var cartitem in Model)
+                {
+                    var thanhtien = cartitem.Quantity * cartitem.Course.originalPrice;
+                    total += thanhtien;
+
+
+                    <tr>
+                        <td>@(stt++)</td>
+                        <td>@cartitem.Course.courseName</td>
+                        <td>@(cartitem.Course.originalPrice.ToString("n0"))</td>
+                        <td>@cartitem.Quantity</td>
+                        <td>@(thanhtien.ToString("n0"))</td>
+                        <td>
+                            <a href="/Courses/DeleteCart?courseId=@cartitem.Course.courseId"
+                               class="remove-cart-item"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4" class="text-right total"><i class="fas fa-dollar-sign"></i>Tổng tiền</td>
+                    <td>@(total.ToString("n0"))</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="6 " class="cart-option">
+
+                        <a href="/Courses/DanhSachHienThi"
+                           class="btn btn-secondary">Tiếp tục xem</a>
+                        <a asp-route=""
+                           data-toggle="modal" data-target="#exampleModalCenter"
+                           class="btn btn-success">Thanh toán</a>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Thanh toán</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-main">
+                        <tr>
+                            <th>STT</th>
+                            <th>Sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var cartitem in Model)
+                        {
+                            var thanhtien = cartitem.Quantity * cartitem.Course.originalPrice;
+                            total += thanhtien;
+
+
+                            <tr>
+                                <td>@(sttmodel++)</td>
+                                <td>@cartitem.Course.courseName</td>
+                                <td>@(cartitem.Course.originalPrice.ToString("n0"))</td>
+                                <td>@cartitem.Quantity</td>
+                                <td>@(thanhtien.ToString("n0"))</td>
+
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4" class="text-right total"><i class="fas fa-dollar-sign"></i>Tổng tiền</td>
+                            <td>@(total.ToString("n0"))</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở về</button>
+                    <form action="/Register/ConfirmCart" method="post">
+                        @foreach (var item in list)
+                        {
+                            <input type="hidden" name="courseId" value="@item" />
+                            
+                        }
+                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body cart">
+                        <div class="col-sm-12 empty-cart-cls text-center">
+                            <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                            <h3><strong>Giỏ hàng trống</strong></h3>
+                            <a href="/Courses/DanhSachHienThi" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Trờ về</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

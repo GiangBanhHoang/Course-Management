@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Courses_MVC.Models
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService authorizationService
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@inject Courses_MVC.Data.CoursesContext context
+
+
+@{
+    var resultAuthorize = await authorizationService.AuthorizeAsync(this.User, "ShowAdminMenu");
+    var user = context.Users.FirstOrDefault(c=>c.Id == UserManager.GetUserId(User));
+}
+
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (resultAuthorize.Succeeded)
+    {
+        <div class="mr-4 mt-2">
+            @await Html.PartialAsync("_cart")
+        </div>
+        <div class="dropdown">
+            <button type="button" class="dropdown-toggle mr-md-2 btn btn-outline-info" data-toggle="dropdown">
+                <img src="/img/icons/@user.avatar" alt="avatar" style="width: 30px;"/> @UserManager.GetUserName(User)
+            </button>
+            <div class="dropdown-menu dropdown-menu-right col-md-5">
+                <a id="manage" class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hồ sơ</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" asp-page="/Role/Index" asp-area="Admin">Quản lý role</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" asp-page="/User/Index" asp-area="Admin">Quản lý user</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" asp-area="" asp-controller="Courses" asp-action="ListCourseAdmin">Quản lý</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item">
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("HomePage", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Đăng xuất</button>
+                    </form>
+                </a>
+            </div>
+        </div>
+
+    }
+    else
+    {
+
+        <div class="mr-4 mt-2">
+            @await Html.PartialAsync("_cart")
+        </div>
+        <div class="dropdown">
+            <button type="button" class="dropdown-toggle mr-md-2 btn btn-outline-info" data-toggle="dropdown">
+                <img src="/img/icons/@user.avatar" alt="avatar" style="width: 30px;"/> @UserManager.GetUserName(User)
+            </button>
+            <div class="dropdown-menu dropdown-menu-right col-md-5">
+                <a id="manage" class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hồ sơ</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item">
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("HomePage", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Đăng xuất</button>
+                    </form>
+                </a>
+            </div>
+        </div>
+
+
+    }
+}
+else
+{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Đăng kí</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+        </li>
+    </ul>
+
+}
+
+
+

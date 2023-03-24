@@ -1,0 +1,99 @@
+﻿@model Courses_MVC.Models.Course
+
+@{
+    ViewData["Title"] = "Chi tiết khóa học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-add_course">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">Chi tiết khóa học</h1>
+        <div class="ml-5">
+            <div class="">
+                <hr />
+
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.courseName)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.courseName)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.discription)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.discription)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.price)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.price)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.originalPrice)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.originalPrice)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.imgCourse)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.imgCourse)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.totalTime)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.totalTime)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.totalStudent)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.totalStudent)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Topic)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Topic.topicName)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Discount)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Discount.discription)
+                    </dd>
+                </dl>
+            </div>
+            <div class="option-detail">
+
+                <div class="back-admin">
+                    <a asp-action="ListCourseAdmin">Quay lại</a>
+                </div>
+                <div class="main-option">
+                    <a asp-action="UpdateCourse" asp-route-id="@Model.courseId">Chỉnh sửa</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    const active_lienhe = document.querySelector('#active--khoahoc')
+    active_lienhe.classList.add('active--css')
+    /*document.querySelector('#active--khoahoc').classList.remove('active--css')*/
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

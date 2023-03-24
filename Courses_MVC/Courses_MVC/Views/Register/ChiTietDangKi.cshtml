@@ -1,0 +1,70 @@
+﻿@model Courses_MVC.Models.Register
+@{
+    ViewData["Title"] = "Chi tiết đăng kí";
+
+}
+
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-add_course">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <div class="ml-5">
+            <div class="">
+                <hr />
+
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.registerId)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.registerId)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.AppUser.UserName)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.AppUser.UserName)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Course.courseName)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Course.courseName)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.timeReg)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.timeReg)
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="option-detail">
+
+                <div class="back-admin">
+                    <a asp-action="DanhSachDangKi">Danh sách đăng kí</a>
+                </div>
+                <div class="main-option">
+                    <a asp-action="CapNhatDangKi" asp-route-id="@Model.registerId">Chỉnh sửa</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+<script>
+    const active_lienhe = document.querySelector('#active--dangki')
+
+    active_lienhe.classList.add('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

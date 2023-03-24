@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Courses_MVC.Models.Course>
+
+@{
+    ViewData["Title"] = "Danh sách khóa học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-courseadmin">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <p class="count--css">Số lượng khóa học: @ViewBag.count</p>
+        <div class="search-create">
+            <form action="/Courses/listCourseAdmin" method="post">
+                <div class="form-inline ">
+                    <label class="control-label " style="margin-right: 5px;">Tìm kiếm</label>
+                    <input type="text" name="searchString" class="form-control col-md-6">
+                    <input type="submit" class="btn btn-info" name="submit" value="search">
+                </div>
+            </form>
+            <div>
+                <a asp-controller="Courses" asp-action="CreateCourse" class="btn btn-outline-success"><i class="fas fa-plus"></i>Thêm</a>
+            </div>
+        </div>
+
+        <div class="table-overflow">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.courseName)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.discription)
+                        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.price)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.originalPrice)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.imgCourse)
+                        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.totalTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.totalStudent)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Topic)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Discount)
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="row-listcourses-admin">
+                            <td class="counterCell">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.courseName)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.discription)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.originalPrice)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.imgCourse)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.totalTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.totalStudent)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Topic.topicName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Discount.discription)
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.courseId"><i class="far fa-edit"></i></a> |
+                                <a asp-action="DeleteCourse" asp-route-id="@item.courseId"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</main>
+@*class="text-danger" onclick="return confirm('Bạn chắn chắn xóa chứ?')*@
+<script>
+    const active_lienhe = document.querySelector('#active--khoahoc')
+    active_lienhe.classList.add('active--css')
+    /*document.querySelector('#active--khoahoc').classList.remove('active--css')*/
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

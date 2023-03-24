@@ -1,0 +1,26 @@
+﻿@page "/user/xoa-user/{userId}"
+@model Courses_MVC.Areas.Admin.Pages.User.DeleteUserModel
+@{
+    ViewData["Title"] = "Xóa role";
+}
+<h2 class="text-center">@ViewData["Title"]</h2>
+<partial name="_StatusMessage" model="@Model.StatusMessage" />
+
+<hr />
+<div class="row mt-3 mb-lg-5 offset-3">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <h2>Bạn có chắc chắn xóa <strong>@Model.user.UserName</strong></h2>
+            <div class="form-group">
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+                <a class="btn btn-primary" asp-page="./Index">Danh sách các user</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

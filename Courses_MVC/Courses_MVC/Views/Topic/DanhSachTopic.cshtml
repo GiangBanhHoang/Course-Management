@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Courses_MVC.Models.Topic>
+@{
+    ViewData["Title"] = "Danh sách chủ đề";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+    <partial name="_NavBar" />
+    <section>
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">Danh sách các chủ đề</h1>
+        <p class="count--css">Số lượng chủ đề: @ViewBag.count</p>
+        <div class="search-create">
+            <form action="" method="post">
+                <div class="form-inline">
+                    <label class="control-label" style="margin-right: 5px;">Tìm kiếm chủ đề</label>
+                    <input type="text" name="search" class="form-control col-md-5">
+                    <input type="submit" class="btn btn-info" name="submit" value="search">
+
+                </div>
+            </form>
+            <div>
+                <a asp-controller="Topic" asp-action="ThemTopic" class="btn btn-outline-success"><i class="far fa-plus-square"></i> Thêm</a>
+            </div>
+        </div>
+        <div class="table-overflow">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.topicName)
+                        </th>
+                        
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="counterCell">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.topicName)
+                            </td>
+                            
+                            <td>
+                                <a asp-action="ChiTietTopic" asp-route-id="@item.topicId"><i class="far fa-edit"></i></a> |
+                                <a asp-action="XoaTopic" asp-route-id="@item.topicId" class="text-danger" onclick="return confirm('Bạn chắn chắn xóa chứ?')"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</main>
+<script>
+    const active_lienhe = document.querySelector('#active--chude')
+
+    active_lienhe.classList.add('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

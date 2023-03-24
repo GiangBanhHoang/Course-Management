@@ -1,0 +1,71 @@
+﻿@model Courses_MVC.Models.Receipt
+@{
+    ViewData["Title"] = "Chi tiết hóa đơn";
+
+}
+
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-add_course">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <div class="ml-5">
+            <div class="">
+                <hr />
+
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.receiptId)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.receiptId)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.registerId)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.registerId)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.totalPrice)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.totalPrice)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.timeReceipt)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.timeReceipt)
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="option-detail">
+
+                <div class="back-admin">
+                    <a asp-action="DanhSachHoaDon">Danh sách hóa đơn</a>
+                </div>
+                <div class="main-option">
+                    <a asp-action="CapNhatHoaDon" asp-route-id="@Model.receiptId">Chỉnh sửa</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+<script>
+    const active_lienhe = document.querySelector('#active--hoadon')
+
+    active_lienhe.classList.add('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

@@ -1,0 +1,87 @@
+﻿@model Courses_MVC.Models.Course
+
+@{
+    ViewData["Title"] = "Chỉnh sửa khóa học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-add_course">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">Cập nhật khóa học</h1>
+        <div class="p-4">
+            <form asp-action="UpdateCourse" class="form-update-course">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="courseId" />
+                <div class="form-group">
+                    <label asp-for="courseName" class="control-label"></label>
+                    <input asp-for="courseName" class="form-control" />
+                    <span asp-validation-for="courseName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="discription" class="control-label"></label>
+                    <textarea asp-for="discription" class="form-control" required rows="4" id="discription"></textarea>
+                    <span asp-validation-for="discription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="price" class="control-label"></label>
+                    <input asp-for="price" class="form-control" />
+                    <span asp-validation-for="price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="originalPrice" class="control-label"></label>
+                    <input asp-for="originalPrice" class="form-control" />
+                    <span asp-validation-for="originalPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="imgCourse" class="control-label"></label>
+                    <input asp-for="imgCourse" class="form-control" />
+                    <span asp-validation-for="imgCourse" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="totalTime" class="control-label"></label>
+                    <input asp-for="totalTime" class="form-control" />
+                    <span asp-validation-for="totalTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="rating" class="control-label"></label>
+                    <input asp-for="rating" class="form-control" />
+                    <span asp-validation-for="rating" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="totalStudent" class="control-label"></label>
+                    <input asp-for="totalStudent" class="form-control" />
+                    <span asp-validation-for="totalStudent" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="topicId" class="control-label">Chủ đề</label>
+                    <select asp-for="topicId" class="form-control" asp-items="ViewBag.topicId"></select>
+                    <span asp-validation-for="topicId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="discountId" class="control-label">Giảm giá</label>
+                    <select asp-for="discountId" class="form-control" asp-items="ViewBag.discountId"></select>
+                    <span asp-validation-for="discountId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Cập nhật" class="btn btn-primary add-update-btn" />
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+@{
+    var summernote = new Courses_MVC.Models.Summernote("#discription");
+
+}
+<partial name="_Summernote" model="summernote" />
+<script>
+    const active_lienhe = document.querySelector('#active--khoahoc')
+    active_lienhe.classList.add('active--css')
+    /*document.querySelector('#active--khoahoc').classList.remove('active--css')*/
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

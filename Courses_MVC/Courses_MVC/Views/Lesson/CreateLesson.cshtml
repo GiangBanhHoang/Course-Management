@@ -1,0 +1,69 @@
+﻿@model Courses_MVC.Models.Lesson
+
+@{
+    ViewData["Title"] = "Thêm bài học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-add_course">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <div class="p-4">
+            <form asp-action="CreateLesson">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="title" class="control-label"></label>
+                    <input asp-for="title" class="form-control" />
+                    <span asp-validation-for="title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="description" class="control-label"></label>
+                    <textarea asp-for="description" class="form-control" id="description"></textarea>
+                    <span asp-validation-for="description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="content" class="control-label"></label>
+                    <textarea asp-for="content" class="form-control" id="content"></textarea>
+                    <span asp-validation-for="content" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="link" class="control-label"></label>
+                    <input asp-for="link" class="form-control" />
+                    <span asp-validation-for="link" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="captionLink" class="control-label"></label>
+                    <input asp-for="captionLink" class="form-control" />
+                    <span asp-validation-for="captionLink" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="courseId" class="control-label"></label>
+                    <select asp-for="courseId" class="form-control" asp-items="ViewBag.courseId"></select>
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Thêm" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+@{
+    var summernote = new Courses_MVC.Models.Summernote("#content");
+    var summernote1 = new Courses_MVC.Models.Summernote("#description", false);
+
+}
+<partial name="_Summernote" model="summernote" />
+<partial name="_Summernote" model="summernote1" />
+<script>
+    const active_lienhe = document.querySelector('#active--khoahoc')
+    active_lienhe.classList.add('active--css')
+    /*document.querySelector('#active--khoahoc').classList.remove('active--css')*/
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

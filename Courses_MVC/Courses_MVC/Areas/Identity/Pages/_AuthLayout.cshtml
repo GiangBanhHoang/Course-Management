@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .login-logout-tab{
+        border-radius: 10px;
+
+    }
+    .background-img {
+        background-image: url(https://id.unica.vn/images/bg-01.jpg);
+        background-size: 1440px;
+    }
+</style>
+<div class="row background-img">
+    <div class="col-md-5 offset-md-4">
+        <div class="card login-logout-tab mt-5 mb-5">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav nav-item col-md-6 justify-content-center" style="display: inline-block">
+                        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+                    </li>
+                    <li class="nav nav-item col-md-6 justify-content-center" style="display: inline-block">
+                        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Đăng kí</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    @RenderSection("Scripts", required: false)
+<script>
+    $(function () {
+        var current = this.location.pathname;
+        $(`.nav-tabs li a`).each(function () {
+            var $this = $(this);
+            if (current.indexOf($this.attr('href')) !== -1) 
+            {
+                $this.addClass('active');
+            }
+        })
+    })
+</script>
+}

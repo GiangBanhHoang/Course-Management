@@ -1,0 +1,125 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@using Courses_MVC.Models
+@model IEnumerable<Courses_MVC.Models.Course>
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@{
+    ViewData["Title"] = "Danh sách khóa học";
+
+}
+
+<link href="~/css/Courses.css" rel="stylesheet" />
+<div>
+    <div class="courses-containner">
+        <div class="courses-header">
+            <h2>Hãy bắt đầu với khóa học đầu tiên của bạn!</h2>
+            <div class="input__group">
+                <form action="/Courses/DanhSachHienThi" method="post" id="form-search" class="form-inline" method="post">
+                    <input type="text" name="courestitle" class="form-control" placeholder="search">
+                    <button class="button-search" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="courses-body">
+            <partial name="_AlertMessage" />
+            @foreach (var tp in ViewBag.listTopic)
+            {
+                <div class="group-topic">
+                    <div class="course-topic"><h2>@tp.topicName</h2></div>
+                    <div class="courses-content">
+                        @foreach (var item in Model)
+                        {
+                            @if (item.topicId == tp.topicId)
+                            {
+                                <div class="one-course">
+                                    <div class="course-image"><img src="@item.imgCourse" alt="" /></div>
+                                    <div class="one-course-content">
+                                        <div class="discount">- @(item.Discount.sale*100)%</div>
+                                        <div class="course-title"><a href="/Lesson/LessonCourse?Id=@item.courseId">@item.courseName</a></div>
+                                        <div class="course-des more">
+                                            <p>
+                                                @item.discription
+                                            </p>
+                                        </div>
+                                        <button id="read-mode-btn" type="button">...Xem thêm</button>
+                                        <div class="origin-price">@item.originalPrice.ToString("n0") <sup>VND</sup></div>
+                                        <div class="course-price"><p>@item.price.ToString("n0") <sup>VND</sup></p></div>
+                                        <div class="add-car-btn">
+                                            @{
+
+                                                if (!SignInManager.IsSignedIn(User))
+                                                {
+                                                    <a asp-area="Identity" asp-page="/Account/Login"
+                                                       class="btn btn-success btn-sm float-right mb-2 add-car-custom ">
+                                                        <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    int check = 0;
+                                                    foreach (var res in ViewBag.listCourseOfUser)
+                                                    {
+                                                        if (res.courseId == item.courseId)
+                                                        {
+                                                            check++;
+                                                        }
+                                                    }
+                                                    if (check == 0)
+                                                    {
+
+                                                        <a href="/Courses/AddtoCart?courseId=@item.courseId"
+                                                           class="btn btn-success btn-sm float-right mb-2 add-car-custom ">
+                                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                                        </a>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="course-had-registered">
+                                                            <button type="button" class="btn  btn-sm float-right mb-2 button-had-registered">
+                                                                Khóa học đã được đăng ký
+                                                            </button>
+                                                        </div>
+
+                                                    }
+                                                }
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+
+    var moreless = document.getElementById("read-mode-btn");
+    moreless.addEventListener("click", readmore);
+    var desContainer = document.getElementById("course-des");
+    function readmore() {
+        console.log("moreless");
+        if (desContainer.style.height === '100px') {
+            moreless.innerText = "Ẩn";
+            desContainer.style.height = '100 %';
+        }
+        else {
+            moreless.innerText = "... Xem thêm";
+            desContainer.style.height = '100px';
+        }
+    }
+    const active_lienhe = document.querySelector('#navbar-khoahoc')
+
+    active_lienhe.classList.add('nav--active')
+    /*document.querySelector('#active--khoahoc').classList.remove('active--css')*/
+
+
+</script>

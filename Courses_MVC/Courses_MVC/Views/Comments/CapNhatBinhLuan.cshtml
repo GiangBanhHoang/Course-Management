@@ -1,0 +1,61 @@
+﻿@model Courses_MVC.Models.Comment
+@{
+    ViewData["Title"] = "Cập nhập bình luận";
+}
+
+<div class="main">
+    <partial name="_NavBar" />
+    <div class="col-md-8">
+        <partial name="_AlertMessage" />
+        <h2 class="contact-title text-center">@ViewData["Title"] của @Model.AppUser.UserName</h2>
+        <form action="" class="col-md-10 offset-md-2 mt-5" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mt-3">
+                <label asp-for="cmtId" class="control-label"></label>
+                <input asp-for="cmtId" class="form-control" disabled/>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="userId" class="control-label"></label>
+                <select asp-for="userId" class="form-control" asp-items="ViewBag.user" disabled></select>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="courseId" class="control-label"></label>
+                <select asp-for="courseId" class="form-control" asp-items="ViewBag.course" disabled></select>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="content" class="control-label"></label>
+                <textarea asp-for="content" class="form-control" id="content"></textarea>
+                <span asp-validation-for="content" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="evaluate" class="control-label"></label>
+                <input asp-for="evaluate" class="form-control" />
+                <span asp-validation-for="evaluate" class="text-danger"></span>
+            </div>
+            <div class="form-row mb-4">
+                <div class="form-group col-md-6">
+                    <input type="submit" name="submit" value="Cập nhật" class="btn btn-primary btn-block" />
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="DanhSachBinhLuan" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Trở về</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+@{
+    var summernote = new Courses_MVC.Models.Summernote("#content");
+
+}
+<partial name="_Summernote" model="summernote" />
+<script>
+    const active_lienhe = document.querySelector('#active--binhluan')
+
+    active_lienhe.classList.add('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

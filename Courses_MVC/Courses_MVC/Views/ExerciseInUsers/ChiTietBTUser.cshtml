@@ -1,0 +1,83 @@
+﻿@model Courses_MVC.Models.ExerciseInUser
+@{
+    ViewData["Title"] = "Chi tiết sinh viên làm bài tập";
+}
+
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-add_course">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <div class="ml-5">
+            <div class="">
+                <hr />
+
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.exerciseId)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.exerciseId)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.AppUser.UserName)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.AppUser.UserName)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.submit)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.submit)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.scores)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.scores)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.content)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.content)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.status)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.status)
+                    </dd>
+                </dl>
+            </div>
+            <div class="option-detail">
+
+                <div class="back-admin">
+                    <a asp-action="DanhSachBTUser">Danh sách sinh viên làm bài tập</a>
+                </div>
+                <div class="main-option">
+                    <a asp-action="CapNhatBTUser" asp-route-exerciseId="@Model.exerciseId" asp-route-userId="@Model.userId">Chỉnh sửa</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+
+@{
+    var summernote = new Courses_MVC.Models.Summernote("#content");
+
+}
+<partial name="_Summernote" model="summernote" />
+<script>
+    const active_lienhe = document.querySelector('#active--SV_BT')
+
+    active_lienhe.classList.add('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,182 @@
+﻿@using Microsoft.AspNetCore.Identity
+@{
+
+    ViewData["Title"] = "Quản lý khóa học";
+}
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+<body>
+    <div class="intro-web">
+        <h2 class="title-section">Giới thiệu web DDG</h2>
+        <div class="intro">
+            <div class="intro-left col-6">
+                <img src="https://codelearn.io/Themes/TheCodeCampPro/Resources/Images/landing-v2/chia-khoa-lap-trinh.png" class="future-img" alt="Giới thiệu sơ lược về DDG" />
+            </div>
+
+            <div class="intro-right ">
+                <ul class="list-key-futures">
+                    <li>
+                        <div class="heading-key">
+
+                            <h3><i class="fas fa-graduation-cap intro-icon"></i>   Nơi tỏa sức đam mê học tập</h3>
+                        </div>
+
+                        <p class="key-des">
+                            Trang web này là nơi chúng tôi tạo ra các bài học bổ ích .
+                            Tại đây, bạn thỏa sức sáng tạo các sản phẩm dựa trên các bài học.
+                        </p>
+                    </li>
+
+                    <li>
+                        <div class="heading-key">
+
+                            <h3><i class="fas fa-laptop-code intro-icon"></i>   Định hướng nghề nghiệp</h3>
+                        </div>
+
+                        <p class="key-des">
+                            Học lập trình giúp bạn có được những kiến thức tốt nhất để làm quen với thế giới công nghệ,
+                            thích nghi với cuộc sống thời đại 4.0.
+                        </p>
+                    </li>
+
+                    <li>
+                        <div class="heading-key">
+
+                            <h3><i class="far fa-handshake intro-icon"></i>   Sẻ chia kinh nghiệm lập trình</h3>
+                        </div>
+
+                        <p class="key-des">
+                            Kỹ năng lập trình có xu hướng đa dạng hơn phục vụ cho nhu cầu phát triển của mọi ngành nghề.
+                            DDG đồng hành cùng bạn để chia sẻ, làm giàu thêm kinh nghiệm lập trình.
+                        </p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="our-statistic">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <div class="wrap-statistic-content">
+                    <div class="statistic-number">
+                        <span class="counter">5</span> +
+                    </div>
+
+                    <h3 class="statistic-title">Thành viên đăng ký</h3>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="wrap-statistic-content">
+                    <div class="statistic-number">
+                        <span class="counter">15</span> +
+                    </div>
+
+                    <h3 class="statistic-title">Bài học luyện tập</h3>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-4">
+                <div class="wrap-statistic-content">
+                    <div class="statistic-number">
+                        <span class="counter">3</span> +
+                    </div>
+
+                    <h3 class="statistic-title">Nhân viên hỗ trợ</h3>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    @*/*part 2*/*@
+    <div class='roadmap-container'>
+        <h2 class='roadmap-title'>Lộ trình để trở thành<br />Lập Trình Viên</h2>
+        <div class='roadmap-row'>
+            <div to='/' class='roadmap-step'>
+                <div class='roadmap-step-img'>
+                    <span class='roadmap-label-step'>1</span>
+                    <img src='https://codelearn.io/Themes/TheCodeCampPro/Resources/Images/landing-v2/hoc-lap-trinh.png' alt='Learn to code' />
+                </div>
+                <h3 class='roadmap-step-title'>Học lập trình</h3>
+                <p class='roadmap-step-des'>Học lập trình từ cơ bản đến nâng cao qua các khóa học.</p>
+            </div>
+
+            <div to='/' class='roadmap-step'>
+                <div class='roadmap-step-img'>
+                    <span class='roadmap-label-step'>2</span>
+                    <img src='https://codelearn.io/Themes/TheCodeCampPro/Resources/Images/landing-v2/luyen-lap-trinh.png' alt='Practice coding' />
+                </div>
+                <h3 class='roadmap-step-title'>Luyện kỹ năng</h3>
+                <p class='roadmap-step-des'>Luyện tập lập trình hàng ngày cùng với chuyên mục luyện tập.</p>
+            </div>
+
+            <div to='/blogs' class='roadmap-step'>
+                <div class='roadmap-step-img'>
+                    <span class='roadmap-label-step'>3</span>
+                    <img src='https://codelearn.io/Themes/TheCodeCampPro/Resources/Images/landing-v2/thi-lap-trinh.png' alt='Share' />
+                </div>
+                <h3 class='roadmap-step-title'>Tìm hiểu thêm</h3>
+                <p class='roadmap-step-des'>Tìm hiểu kỹ năng lập trình thông qua chia sẻ từ mọi người.</p>
+            </div>
+        </div>
+    </div>
+    @**part 3**@
+    <div id="Slider">
+        <div class="Slider-title">
+            <h2>Học viên nói gì về DDG?</h2>
+        </div>
+        <div class="Slider-main">
+            <div class="Slide">
+                <div class="Slider-item-avt">
+                </div>
+                <p class="Slider-item-name">Khánh Duy</p>
+                <p class="Slider-item-job">Sinh viên</p>
+                <p class="Slider-item-think">"Thật tuyệt vời"</p>
+            </div>
+            <div class="Slide">
+                <div class="Slider-item-avt">
+                </div>
+                <p class="Slider-item-name">Hải Đăng</p>
+                <p class="Slider-item-job">Sinh viên</p>
+                <p class="Slider-item-think">"Trên cả mong đợi"</p>
+            </div>
+            <div class="Slide">
+                <div class="Slider-item-avt">
+                </div>
+                <p class="Slider-item-name">Hoàng Giang</p>
+                <p class="Slider-item-job">Sinh viên</p>
+                <p class="Slider-item-think">"Xuất sắc"</p>
+            </div>
+        </div>
+    </div>
+    @*banner*@
+<div class="Banner">
+    <div class="Banner-content">
+        <p class="title">HIỆN THỰC ĐAM MÊ <span>LẬP TRÌNH</span>!</p>
+        <p class="content">Đăng ký tài khoản và tham gia ngay hôm nay</p>
+    </div>
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <div class="Banner-button">
+            <a class="Banner-btn" asp-area="Identity" asp-page="/Account/Register">Bắt đầu ngay!</a>
+        </div>
+    }
+    else
+    {
+        <div class="Banner-button">
+            <a class="Banner-btn" asp-controller="Courses" asp-action="DanhSachHienThi">Bắt đầu ngay!</a>
+        </div>
+    }
+
+</div>
+</body>
+
+<script>
+    const active_lienhe = document.querySelector('#navbar-trangchu')
+
+    active_lienhe.classList.add('nav--active')
+    /*document.querySelector('#active--khoahoc').classList.remove('active--css')*/
+</script>

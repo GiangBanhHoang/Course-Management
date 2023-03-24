@@ -1,0 +1,71 @@
+﻿@model Courses_MVC.Models.Discount
+@{
+    ViewData["Title"] = "Chi tiết giảm giá";
+
+}
+
+<main class="main">
+    <div class="sidebar-admin">
+        <partial name="_NavBar" />
+    </div>
+    <section class="section-add_course">
+        <partial name="_AlertMessage" />
+        <h1 class="text-center mt-3">@ViewData["Title"]</h1>
+        <div class="ml-5">
+            <div class="">
+                <hr />
+
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.discountId)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.discountId)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.discription)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.discription)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.time)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.time)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.sale)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.sale)
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="option-detail">
+
+                <div class="back-admin">
+                    <a asp-action="DanhSachGiamGia">Danh sách giảm giá</a>
+                </div>
+                <div class="main-option">
+                    <a asp-action="CapNhatGiamGia" asp-route-id="@Model.discountId">Chỉnh sửa</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+<script>
+    const active_lienhe = document.querySelector('#active--giamgia')
+
+    active_lienhe.classList.add('active--css')
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

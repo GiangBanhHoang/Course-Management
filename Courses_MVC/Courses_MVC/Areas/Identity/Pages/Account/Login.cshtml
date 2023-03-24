@@ -1,0 +1,124 @@
+﻿@page "/Login/"
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Đăng nhập";
+    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+    var thongbao = TempData["ErrorMessage"];
+}
+
+
+@if (TempData.ContainsKey("ErrorMessage")) // hiển thị thông báo lỗi nêu có dữ liệu trong TempData
+{
+    <partial name="/Areas/Identity/Pages/Account/_StatusMessage.cshtml" model="thongbao" />
+
+}
+
+<style>
+    .login-form-icon {
+        text-align: center;
+        font-size: 100px;
+        color: #6a6868;
+    }
+</style>
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <section>
+            <div class="login-form-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <form id="account" method="post">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.UserNameOrEmail"></label>
+                    <input asp-for="Input.UserNameOrEmail" class="form-control" />
+                    <span asp-validation-for="Input.UserNameOrEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info btn-block">Đăng nhập</button>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Quên mật khẩu?</a>
+                    </p>
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Đăng kí tài khoản mới</a>
+                    </p>
+
+                </div>
+            </form>
+            <hr />
+            <p class="text-center mt-3">Hoặc đăng nhập bằng</p>
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            Cấu hình
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div class="form-row">
+
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+                                <button type="submit" class="btn btn-outline-primary form-control col-md-6" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                            }
+
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+    @*<div class="col-md-6 col-md-offset-2">
+            <section>
+                <h4>Sử dụng dịch vụ ngoài.</h4>
+                <hr />
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
+                        <div>
+                            <p>
+                                Cấu hình
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Sử dụng @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
+                }
+            </section>
+        </div>*@
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
